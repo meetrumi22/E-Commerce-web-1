@@ -43,15 +43,12 @@ export async function getStaticProps({ params: { id } }) {
 }
 
 export async function getStaticPaths() {
-  return {
-    paths: [
-      {
-        params: {
-          id: "64d1eefc1478563d6bd00e52",
-        },
-      },
-    ],
-    fallback: false,
-  };
+  const getAll = await fetch(`${domain}/api/products`);
+  const data = await getAll.json();
+
+  const paths = data.map((ids) => ({
+    params: { id: ids._id },
+  }));
+  return { paths, fallback: false };
 }
 export default Id;
