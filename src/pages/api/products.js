@@ -2,13 +2,34 @@
 
 import product from "../../../model/productScehma";
 import mongoInit from "../../../helper/mongoinit";
-mongoInit()
+mongoInit();
 
+const getAndSendProduct = async (req, res) => {
+  switch (req.method) {
+    case "GET":
+      await getAllProducts(req, res);
+      break;
+    case "POST":
+      await createProduct(req, res);
+  }
+};
 const getAllProducts = (req, res) => {
-  const getAllProduct = product.find().then(products => {
+  product.find().then((products) => {
+    res.status(200).json(products);
+  });
+};
+const createProduct = async (req, res) => {
+  const { name, price,mediaUrl, description} = req.body;
+  if(!name || !price || !description || !mediaUrl ){
+    res.json(422).json({error:"some thing is missing"})
+  }
+  const saveProduct = await new product({
+    price,
+    mediaUrl,
+    name,
+    description,
+  });
+  saveProduct.save();
+};
 
-    res.status(200).json(products)
-  })
-}
-
-export default getAllProducts
+export default getAndSendProduct;

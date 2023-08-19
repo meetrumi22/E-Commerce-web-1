@@ -12,7 +12,7 @@ import {
 const Id = ({ product }) => {
   return (
     <>
-      <Card key={product._id} className="w-96 bg-red-200 mx-auto">
+      <Card className="w-96 bg-red-200 mx-auto">
         <CardHeader>
           <img src={product.mediaUrl} alt="image" />
         </CardHeader>
