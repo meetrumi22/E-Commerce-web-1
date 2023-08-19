@@ -1,6 +1,7 @@
 import { domain } from "../../../helper/domain";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   Card,
   CardContent,
@@ -10,6 +11,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 const Id = ({ product }) => {
+  const router = useRouter();
+
+  const deleteProduct = async () => {
+    await fetch(`${domain}/api/product/${product._id}`, {
+      method: "DELETE",
+    });
+    router.push("/");
+  };
   return (
     <>
       <Card className="w-96 bg-red-200 mx-auto">
@@ -20,11 +29,19 @@ const Id = ({ product }) => {
           <CardTitle>Name: {product.name}</CardTitle>
           <CardDescription>Description: {product.description}</CardDescription>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="gap-28">
           <Button variant={"destructive"}>
             <Link href={"/product/[id]"} as={`/product/${product._id}`}>
               Price: {product.price}
             </Link>
+          </Button>
+          <Button
+            variant={"destructive"}
+            onClick={() => {
+              deleteProduct()
+            }}
+          >
+            Delete: {product.name}
           </Button>
         </CardFooter>
       </Card>
