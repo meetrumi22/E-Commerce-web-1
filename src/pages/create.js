@@ -16,20 +16,25 @@ const create = () => {
         price,
         description,
         mediaUrl,
-      }),
+      })
     });
 
     console.log({ res });
   };
 
-  const [name, setName] = useState();
-  const [price, setPrice] = useState();
-  const [description, setDescription] = useState();
-  const [mediaUrl, setMediaurl] = useState();
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [mediaUrl, setMediaUrl] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
     createProduct();
+    setName("")
+    // setPrice("")
+    // setDescription("")
+    // setMediaUrl("")
+
   };
 
   return (
@@ -64,9 +69,10 @@ const create = () => {
           type="text"
           placeholder="enter mediaUrl"
           className=" w-96 p-2 outline-none"
-          onChange={(e) => setMediaurl(e.target.value)}
+          onChange={(e) => setMediaUrl(e.target.value)}
           value={mediaUrl}
         />
+        
         <Button variant="destructive">Submit</Button>
       </div>
     </form>

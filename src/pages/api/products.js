@@ -19,15 +19,17 @@ const getAllProducts = (req, res) => {
   });
 };
 const createProduct = async (req, res) => {
-  const { name, price, description, mediaUrl } = req.body;
-  console.log({mediaUrl})
-  const saveProduct = new product({
-    name,
+  const { name, price,mediaUrl, description} = req.body;
+  if(!name || !price || !description || !mediaUrl ){
+    res.json(422).json({error:"some thing is missing"})
+  }
+  const saveProduct = await new product({
     price,
     mediaUrl,
+    name,
     description,
   });
-  await saveProduct.save();
+  saveProduct.save();
 };
 
 export default getAndSendProduct;

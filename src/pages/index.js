@@ -13,6 +13,7 @@ const Home = ({ products }) => {
     return (
       <Card key={product._id} className="w-96 bg-red-200 mx-auto">
         <CardHeader>
+          {console.log(product.name,product.mediaUrl)}
           <img src={product.mediaUrl} alt="image" />
         </CardHeader>
         <CardContent>

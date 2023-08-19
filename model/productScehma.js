@@ -14,10 +14,11 @@ const productSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    imageUrl:{
+    mediaUrl:{
         type:String,
         require:true
     }
+
 })
 
 export default mongoose.models.product || mongoose.model("product",productSchema)
